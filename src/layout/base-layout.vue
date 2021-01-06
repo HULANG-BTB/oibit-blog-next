@@ -2,7 +2,7 @@
   <div class="home-layout">
     <div class="header">
       <div class="container flex">
-        <div class="logo">AloenH</div>
+        <div class="logo">AloneH</div>
         <div class="title">行也思君，坐也思君</div>
       </div>
     </div>

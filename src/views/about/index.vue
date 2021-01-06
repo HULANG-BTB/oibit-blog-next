@@ -58,10 +58,15 @@
         <div class="social">
           <ul>
             <li>
-              <svg class="icon icon-github">
-                <use xlink:href="#icon-github"></use>
-              </svg>
-              <span><a href="https://github.com/HULANG-BTB">HULANG-BTB</a></span>
+              <hover-tips>
+                <svg class="icon icon-github">
+                  <use xlink:href="#icon-github"></use>
+                </svg>
+                <span><a href="https://github.com/HULANG-BTB">HULANG-BTB</a></span>
+                <template #tips>
+                  <div style="white-space: nowrap; font-weight: bold; line-height: 2rem">https://github.com/HULANG-BTB</div>
+                </template>
+              </hover-tips>
             </li>
             <li>
               <hover-tips>
@@ -195,7 +200,7 @@ export default {
             height: 1.5rem;
           }
 
-          /deep/ {
+          :deep() {
             .icon {
               font-size: 1.5rem;
               margin-right: 0.4rem;
