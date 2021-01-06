@@ -78,6 +78,7 @@ export default {
 
   .main-content {
     flex-grow: 1;
+    width: 0;
     margin-right: 0.5rem;
 
     .banner {
