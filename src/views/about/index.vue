@@ -8,21 +8,15 @@
         <div class="introduction">
           <ul>
             <li>
-              <svg class="icon icon-student">
-                <use xlink:href="#icon-student"></use>
-              </svg>
+              <svg-icon icon="icon-student" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>胡 浪</span>
             </li>
             <li>
-              <svg class="icon icon-email">
-                <use xlink:href="#icon-email"></use>
-              </svg>
+              <svg-icon icon="icon-email" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>admin@oibit.cn</span>
             </li>
             <li>
-              <svg class="icon icon-phone">
-                <use xlink:href="#icon-phone"></use>
-              </svg>
+              <svg-icon icon="icon-phone" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>+86 18212092054</span>
             </li>
           </ul>
@@ -30,27 +24,19 @@
         <div class="skill">
           <ul>
             <li>
-              <svg class="icon icon-html">
-                <use xlink:href="#icon-html"></use>
-              </svg>
+              <svg-icon icon="icon-html" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>H5 & CSS3</span>
             </li>
             <li>
-              <svg class="icon icon-webpack">
-                <use xlink:href="#icon-webpack"></use>
-              </svg>
+              <svg-icon icon="icon-webpack" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>Webpack</span>
             </li>
             <li>
-              <svg class="icon icon-Vue">
-                <use xlink:href="#icon-Vue"></use>
-              </svg>
+              <svg-icon icon="icon-Vue" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>2.x & 3.0</span>
             </li>
             <li>
-              <svg class="icon icon-java">
-                <use xlink:href="#icon-java"></use>
-              </svg>
+              <svg-icon icon="icon-java" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>Spring Boot</span>
             </li>
           </ul>
@@ -59,9 +45,7 @@
           <ul>
             <li>
               <hover-tips>
-                <svg class="icon icon-github">
-                  <use xlink:href="#icon-github"></use>
-                </svg>
+                <svg-icon icon="icon-github" width="1.5rem" height="1.5rem"> </svg-icon>
                 <span><a href="https://github.com/HULANG-BTB" target="_blank">HULANG-BTB</a></span>
                 <template #tips>
                   <div style="white-space: nowrap; font-weight: bold; line-height: 2rem">https://github.com/HULANG-BTB</div>
@@ -70,9 +54,7 @@
             </li>
             <li>
               <hover-tips>
-                <svg class="icon icon-qq">
-                  <use xlink:href="#icon-qq"></use>
-                </svg>
+                <svg-icon icon="icon-qq" width="1.5rem" height="1.5rem"> </svg-icon>
                 <span>774023581</span>
                 <template #tips>
                   <img src="uploads/images/qq.png" width="150" alt="" srcset="" />
@@ -81,9 +63,7 @@
             </li>
             <li class="wechat">
               <hover-tips>
-                <svg class="icon icon-wechat">
-                  <use xlink:href="#icon-wechat"></use>
-                </svg>
+                <svg-icon icon="icon-wechat" width="1.5rem" height="1.5rem"> </svg-icon>
                 <span>HULANG-BTB</span>
                 <template #tips>
                   <img src="uploads/images/wechat.png" width="150" alt="" srcset="" />
@@ -95,27 +75,19 @@
         <div class="hobbies">
           <ul>
             <li>
-              <svg class="icon icon-ai">
-                <use xlink:href="#icon-ai"></use>
-              </svg>
+              <svg-icon icon="icon-ai" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>Algorithm</span>
             </li>
             <li>
-              <svg class="icon icon-movie">
-                <use xlink:href="#icon-movie"></use>
-              </svg>
+              <svg-icon icon="icon-movie" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>Movies</span>
             </li>
             <li>
-              <svg class="icon icon-music">
-                <use xlink:href="#icon-music"></use>
-              </svg>
+              <svg-icon icon="icon-music" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>Musics</span>
             </li>
             <li>
-              <svg class="icon icon-Game">
-                <use xlink:href="#icon-Game"></use>
-              </svg>
+              <svg-icon icon="icon-Game" width="1.5rem" height="1.5rem"> </svg-icon>
               <span>Games</span>
             </li>
           </ul>
