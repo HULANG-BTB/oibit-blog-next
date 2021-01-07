@@ -1,6 +1,6 @@
 <template>
   <div class="home-layout">
-    <div class="header">
+    <div class="header unselected">
       <div class="container flex">
         <div class="logo">AloneH</div>
         <div class="title">行也思君，坐也思君</div>
