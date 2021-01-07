@@ -62,7 +62,7 @@
                 <svg class="icon icon-github">
                   <use xlink:href="#icon-github"></use>
                 </svg>
-                <span><a href="https://github.com/HULANG-BTB">HULANG-BTB</a></span>
+                <span><a href="https://github.com/HULANG-BTB" target="_blank">HULANG-BTB</a></span>
                 <template #tips>
                   <div style="white-space: nowrap; font-weight: bold; line-height: 2rem">https://github.com/HULANG-BTB</div>
                 </template>
