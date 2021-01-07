@@ -56,6 +56,9 @@ export default {
         code = lang ? hljs.highlight(lang, code).value : code
         return `<pre><code lang="${lang}">${code}</code></pre>`
       }
+      renderer.link = (href, title, text) => {
+        return `<a href="${href}" target="_blank">${text}</a>`
+      }
       return marked(article.value.content || '', { renderer })
     })
 
