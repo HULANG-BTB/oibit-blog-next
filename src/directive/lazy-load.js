@@ -1,22 +1,33 @@
-// import { Directive } from 'vue'
-
-// export declare interface ObjectDirective<T = any, V = any> {
-//   created?: DirectiveHook<T, null, V>;
-//   beforeMount?: DirectiveHook<T, null, V>;
-//   mounted?: DirectiveHook<T, null, V>;
-//   beforeUpdate?: DirectiveHook<T, VNode<any, T>, V>;
-//   updated?: DirectiveHook<T, VNode<any, T>, V>;
-//   beforeUnmount?: DirectiveHook<T, null, V>;
-//   unmounted?: DirectiveHook<T, null, V>;
-//   getSSRProps?: SSRDirectiveHook;
-// }
-
 const lazyLoad = {
-  beforeMount(el, binding) {
-    console.log(el, binding)
+  listener() {
+    const getScrollTop = () => {
+      var scroll_top = 0
+      if (document.documentElement && document.documentElement.scrollTop) {
+        scroll_top = document.documentElement.scrollTop
+      } else if (document.body) {
+        scroll_top = document.body.scrollTop
+      }
+      return scroll_top
+    }
+    if (!this.loaded) {
+      const elOffsetTop = this.el.y
+      const visiableHeight = getScrollTop() + window.outerHeight
+      if (elOffsetTop <= visiableHeight) {
+        console.log(this)
+        const attribute = this.binding.arg
+        const value = this.binding.value
+        this.el.setAttribute(attribute, value)
+        this.loaded = true
+        window.removeEventListener('scroll', lazyLoad.listener)
+      }
+    }
   },
-  beforeUnmount(el, binding) {
-    console.log(el, binding)
+  mounted(el, binding) {
+    window.addEventListener('scroll', lazyLoad.listener.bind({ el, binding }))
+    lazyLoad.listener.bind({ el, binding })()
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', lazyLoad.listener)
   }
 }
 

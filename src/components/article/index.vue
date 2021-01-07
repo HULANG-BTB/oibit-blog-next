@@ -1,7 +1,7 @@
 <template>
   <div class="article-item">
     <div class="thubmnail" @click="onReadArticle">
-      <img :src="article.thumbnail" alt="article.thumbnail" />
+      <img v-lazy:src="article.thumbnail" v-lazy:alt="article.thumbnail" />
     </div>
     <div class="article-info">
       <div class="title" @click="onReadArticle">{{ article.title }}</div>
