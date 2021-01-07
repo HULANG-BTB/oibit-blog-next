@@ -1,5 +1,8 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
+import { throttle, debounce } from '@/utils'
+
+NProgress.configure({ showSpinner: false })
 
 // create an axios instance
 const instance = axios.create({
@@ -13,7 +16,9 @@ instance.interceptors.request.use(
   config => {
     // do something before request is sent
 
-    NProgress.start()
+    throttle(() => {
+      NProgress.start()
+    })()
 
     // if (store.getters.token) {
     //   // let each request carry token
@@ -26,7 +31,9 @@ instance.interceptors.request.use(
   error => {
     // do something with request error
     console.log(error) // for debug
-    NProgress.done()
+    debounce(() => {
+      NProgress.done()
+    })()
     return Promise.reject(error)
   }
 )
@@ -45,12 +52,16 @@ instance.interceptors.response.use(
    */
   response => {
     const res = response.data
-    NProgress.done()
+    debounce(() => {
+      NProgress.done()
+    })()
     return res.data
   },
   error => {
     console.log('err' + error) // for debug
-    NProgress.done()
+    debounce(() => {
+      NProgress.done()
+    })()
     return Promise.reject(error)
   }
 )
