@@ -44,7 +44,7 @@ export default {
   background-image: url('../assets/img/background.png');
 
   .header {
-    z-index: 99999;
+    z-index: 20000;
     position: fixed;
     height: 60px;
     width: 100vw;
@@ -53,7 +53,6 @@ export default {
     align-items: center;
     justify-content: center;
     background-color: hsla(0, 0%, 100%, 0.6);
-    transition: all 0.3s ease-in;
 
     .logo {
       font-family: 'MAGNETOB';
@@ -99,7 +98,7 @@ export default {
       margin-left: 0.5rem;
 
       .zoom-enter-active {
-        transition: all 0.3s ease-in-out 0.5s;
+        transition: all 0.3s ease-in-out 0.3s;
       }
 
       .zoom-leave-active {
@@ -112,9 +111,12 @@ export default {
         opacity: 1;
       }
 
-      .zoom-enter-from,
-      .zoom-leave-to {
+      .zoom-enter-from {
         transform: translateY(15rem);
+        opacity: 0;
+      }
+      .zoom-leave-to {
+        transform: translateY(-15rem);
         opacity: 0;
       }
     }

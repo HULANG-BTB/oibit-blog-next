@@ -42,4 +42,8 @@ body {
   .markdown {
     @import './markdown.scss';
   }
+
+  #nprogress .bar {
+    z-index: 21000;
+  }
 }

@@ -22,7 +22,7 @@ export const throttle = function(func, delay = 500) {
  * @param { Function } func
  * @param { Number } delay
  */
-export const debounce = function(func, delay = 200) {
+export const debounce = function(func, delay = 500) {
   let timeout = null
   return function() {
     if (timeout !== null) clearTimeout(timeout)
