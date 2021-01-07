@@ -2,7 +2,7 @@
   <div class="menu" :style="{ marginTop: position + 'px' }">
     <ul>
       <li v-for="(item, index) in menu.menus" :key="index" class="unselected" :class="{ active: item.route === route.name }" @click="menu.click(item)">
-        <i :class="['icon', item.icon]"></i>
+        <svg-icon :icon="item.icon"></svg-icon>
         {{ item.title }}
       </li>
     </ul>
@@ -97,6 +97,9 @@ export default {
     align-items: center;
 
     li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       width: 100%;
       padding-left: 1rem;
       text-align: left;
