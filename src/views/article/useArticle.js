@@ -5,13 +5,13 @@ export const article = ref({})
 
 export const queryArticleInfo = async id => {
   const data = await request({
-    method: 'post',
-    url: '/data/api/Article/getArticleInfo',
-    data: {
+    method: 'get',
+    url: '/api/article/detail',
+    params: {
       id
     }
   })
-  article.value = data || {}
+  article.value = data.data || {}
 }
 
 export default {

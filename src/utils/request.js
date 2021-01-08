@@ -55,7 +55,7 @@ instance.interceptors.response.use(
     debounce(() => {
       NProgress.done()
     })()
-    return res.data
+    return res
   },
   error => {
     console.log('err' + error) // for debug

@@ -6,10 +6,10 @@ export const articles = ref([])
 export const queryArchiveInfo = async () => {
   try {
     const data = await request({
-      method: 'post',
-      url: '/data/api/Article/getArticleListByTime'
+      method: 'get',
+      url: '/api/article/archive'
     })
-    articles.value = data?.data?.data || []
+    articles.value = data.data || []
   } catch {
     articles.value = []
   }

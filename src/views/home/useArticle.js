@@ -10,27 +10,27 @@ const pagging = {
     this.page = page
     this.limit = limit
     const data = await request({
-      method: 'post',
-      url: '/data/api/Article/getArticleListByPaginator',
-      data: {
+      method: 'get',
+      url: '/api/article/list',
+      params: {
         page,
         limit
       }
     })
-    this.data.value = data.data.data
+    this.data.value = data.data
   },
   loadMore: async function() {
     try {
       this.loading.value = true
       const data = await request({
-        method: 'post',
-        url: '/data/api/Article/getArticleListByPaginator',
-        data: {
+        method: 'get',
+        url: '/api/article/list',
+        params: {
           page: ++this.page,
           limit: this.limit
         }
       })
-      this.data.value.push(...data.data.data)
+      this.data.value.push(...data.data)
     } finally {
       this.loading.value = false
     }

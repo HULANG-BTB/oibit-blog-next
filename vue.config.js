@@ -11,8 +11,8 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/data/api': {
-        target: 'https://oibit.cn',
+      '/api': {
+        target: 'http://localhost:3000',
         changeOrgin: true
       }
     }
