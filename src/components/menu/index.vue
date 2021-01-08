@@ -29,7 +29,7 @@ export default {
         },
         {
           title: 'Frontend',
-          icon: 'icon-book',
+          icon: 'icon-table',
           route: 'Category'
         },
         {
@@ -44,7 +44,7 @@ export default {
         },
         {
           title: 'About',
-          icon: 'icon-aboutus',
+          icon: 'icon-user',
           route: 'About'
         }
       ],
