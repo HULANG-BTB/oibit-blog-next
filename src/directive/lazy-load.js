@@ -8,7 +8,13 @@ const lazyLoad = {
       if (elOffsetTop <= visiableHeight && elOffsetLeft <= visiableWidth) {
         const attribute = this.binding.arg
         const value = this.binding.value
-        this.el.setAttribute(attribute, value)
+        if (Array.isArray(attribute)) {
+          attribute.forEach(attr => {
+            this.el.setAttribute(attr, value)
+          })
+        } else {
+          this.el.setAttribute(attribute, value)
+        }
         this.loaded = true
         window.removeEventListener('scroll', lazyLoad.listener)
       }

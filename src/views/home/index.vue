@@ -4,16 +4,16 @@
       <div class="banner">
         <carousel :duration="3000" :auto-play="true">
           <carousel-item>
-            <img src="../../assets/img/banner-1.jpg" alt="" />
+            <!-- <img src="../../assets/img/banner-1.jpg" alt="" /> -->
           </carousel-item>
           <carousel-item>
-            <img src="../../assets/img/banner-2.jpg" alt="" />
+            <!-- <img src="../../assets/img/banner-2.jpg" alt="" /> -->
           </carousel-item>
           <carousel-item>
-            <img src="../../assets/img/banner-3.jpg" alt="" />
+            <!-- <img src="../../assets/img/banner-3.jpg" alt="" /> -->
           </carousel-item>
           <carousel-item>
-            <img src="../../assets/img/banner-4.jpg" alt="" />
+            <!-- <img src="../../assets/img/banner-4.jpg" alt="" /> -->
           </carousel-item>
         </carousel>
       </div>
