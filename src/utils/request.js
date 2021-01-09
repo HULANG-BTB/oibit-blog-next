@@ -55,6 +55,9 @@ instance.interceptors.response.use(
     debounce(() => {
       NProgress.done()
     })()
+    if (res.code !== 200) {
+      return res.error
+    }
     return res
   },
   error => {
