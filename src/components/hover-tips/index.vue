@@ -17,6 +17,7 @@ export default {
 .hover-tips {
   position: relative;
   display: inherit;
+  user-select: text;
 
   &:hover {
     .tips {
