@@ -1,4 +1,5 @@
 import BaseLayout from '@/layout/base-layout'
+import AdminLayout from '@/layout/admin-layout'
 import asyncComponents from '@/views'
 
 export default [
@@ -15,6 +16,21 @@ export default [
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
+  {
+    path: '/Admin',
+    component: AdminLayout,
+    children: [
+      {
+        path: '',
+        redirect: 'ArticleAdmin'
+      },
+      {
+        path: 'Article',
+        name: 'ArticleAdmin',
+        component: asyncComponents['article-admin']
+      }
+    ]
+  },
   {
     path: '/',
     component: BaseLayout,
