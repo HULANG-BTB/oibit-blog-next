@@ -17,7 +17,7 @@ const pagging = {
         limit
       }
     })
-    this.data.value = data.data
+    this.data.value = data.rows
   },
   loadMore: async function() {
     try {
@@ -30,7 +30,7 @@ const pagging = {
           limit: this.limit
         }
       })
-      this.data.value.push(...data.data)
+      this.data.value.push(...data.rows)
     } finally {
       this.loading.value = false
     }

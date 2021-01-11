@@ -58,7 +58,7 @@ instance.interceptors.response.use(
     if (res.code !== 200) {
       return res.error
     }
-    return res
+    return res.data
   },
   error => {
     console.log('err' + error) // for debug

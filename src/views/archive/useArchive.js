@@ -9,7 +9,7 @@ export const queryArchiveInfo = async () => {
       method: 'get',
       url: '/api/article/archive'
     })
-    articles.value = data.data || []
+    articles.value = data || []
   } catch {
     articles.value = []
   }
