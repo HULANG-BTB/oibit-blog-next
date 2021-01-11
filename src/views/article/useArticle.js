@@ -11,7 +11,7 @@ export const queryArticleInfo = async id => {
       id
     }
   })
-  article.value = data.data || {}
+  article.value = data?.data || {}
 }
 
 export default {
