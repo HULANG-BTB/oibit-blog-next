@@ -32,12 +32,13 @@ import PanelLayout from '@/layout/panel-layout'
 import { ElTable, ElTableColumn, ElButton, ElPagination, ElMessageBox } from 'element-plus'
 import usePagging from './usePagging'
 import request from '@/utils/request'
-import { onUpdated, ref } from 'vue'
+import { ref } from 'vue'
 
 export default {
   name: 'article-admin',
   components: { PanelLayout, ElTable, ElTableColumn, ElButton, ElPagination },
-  setup() {
+  emits: ['change-view'],
+  setup(props, context) {
     const tableData = ref([])
     const tableRef = ref(null)
 
@@ -63,10 +64,6 @@ export default {
       console.log(data)
     }
 
-    onUpdated(() => {
-      tableRef.value.doLayout()
-    })
-
     const pagging = usePagging(fetchData)
 
     pagging.pageChange(1)
@@ -76,7 +73,7 @@ export default {
     }
 
     const onAdd = () => {
-      console.log('add')
+      context.emit('change-view', 'add')
     }
 
     const onDelete = row => {
