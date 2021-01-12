@@ -19,6 +19,9 @@ export default [
   {
     path: '/Admin',
     component: AdminLayout,
+    meta: {
+      needAuth: true
+    },
     children: [
       {
         path: '',
@@ -27,9 +30,17 @@ export default [
       {
         path: 'Article',
         name: 'ArticleAdmin',
-        component: asyncComponents['article-admin']
+        component: asyncComponents['article-admin'],
+        meta: {
+          needAuth: true
+        }
       }
     ]
+  },
+  {
+    path: '/Login',
+    name: 'Login',
+    component: asyncComponents['login']
   },
   {
     path: '/',
