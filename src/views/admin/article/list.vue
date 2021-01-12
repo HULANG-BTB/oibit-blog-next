@@ -1,6 +1,9 @@
 <template>
   <panel-layout class="article-admin">
     <template #title>文章管理</template>
+    <template #toobar>
+      <el-button size="mini" type="success" @click="onAdd()">新增</el-button>
+    </template>
     <el-table ref="tableRef" :data="tableData" border style="width: 100%">
       <el-table-column label="序号" width="80" align="center" prop="id"></el-table-column>
       <el-table-column label="标题" prop="title"> </el-table-column>
@@ -72,6 +75,10 @@ export default {
       console.log(row)
     }
 
+    const onAdd = () => {
+      console.log('add')
+    }
+
     const onDelete = row => {
       console.log(row)
       ElMessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -88,6 +95,7 @@ export default {
       pagging,
       tableData,
       tableRef,
+      onAdd,
       onEdit,
       onDelete
     }
