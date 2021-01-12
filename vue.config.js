@@ -11,7 +11,11 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/api': {
+      '^/api': {
+        target: 'http://localhost:3000',
+        changeOrgin: true
+      },
+      '^/static': {
         target: 'http://localhost:3000',
         changeOrgin: true
       }
