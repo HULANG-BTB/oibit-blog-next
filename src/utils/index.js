@@ -9,8 +9,8 @@ export const throttle = function(func, delay = 500) {
     const context = this
     const args = arguments
     if (!timer) {
+      func.apply(context, args)
       timer = setTimeout(function() {
-        func.apply(context, args)
         timer = null
       }, delay)
     }
