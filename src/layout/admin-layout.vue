@@ -1,7 +1,7 @@
 <template>
   <div class="admin-layout">
     <div class="admin-container">
-      <div class="aside">
+      <div class="aside" v-if="false">
         <div class="menu">
           <ul>
             <li class="unselected" v-for="item in menu.list" :key="item.title" @click="menu.click(item)">{{ item.title }}</li>
