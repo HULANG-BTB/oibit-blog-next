@@ -22,7 +22,7 @@ export default [
     children: [
       {
         path: '',
-        redirect: 'ArticleAdmin'
+        redirect: { name: 'ArticleAdmin' }
       },
       {
         path: 'Article',
