@@ -1,7 +1,12 @@
 <template>
   <div class="panel-layout">
     <div class="title">
-      <slot name="title"></slot>
+      <div class="left">
+        <slot name="title"></slot>
+      </div>
+      <div class="right">
+        <slot name="toobar"></slot>
+      </div>
     </div>
     <div class="divide"></div>
     <div class="conetnt">
@@ -26,6 +31,7 @@ export default {
     flex-direction: row;
     align-items: center;
     padding: 1rem;
+    justify-content: space-between;
   }
   .divide {
     width: 100%;
