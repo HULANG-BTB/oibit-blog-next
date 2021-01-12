@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-form">
       <div class="title">Login</div>
-      <el-form ref="formRef" :model="form.data" :rules="form.rules">
+      <el-form ref="formRef" :model="form.data" :rules="form.rules" @keyup.enter="onLogin">
         <el-form-item prop="username">
           <el-input v-model="form.data.username" placeholder="Username"></el-input>
         </el-form-item>
