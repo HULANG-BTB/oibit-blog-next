@@ -40,6 +40,8 @@ export default {
   }
   .conetnt {
     padding: 1rem;
+    max-width: 100%;
+    overflow: hidden;
   }
 }
 </style>
