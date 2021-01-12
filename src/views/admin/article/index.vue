@@ -7,7 +7,8 @@
     </template>
     <template #toobar>
       <el-button v-if="view === 'list'" size="mini" type="success" @click="onAdd">新增</el-button>
-      <el-button v-else size="mini" type="primary" @click="onQuery">返回</el-button>
+      <el-button v-if="view !== 'list'" size="mini" type="primary" @click="onQuery">返回</el-button>
+      <el-button v-if="view !== 'list'" size="mini" type="success" @click="onSave">保存</el-button>
     </template>
     <div class="page-content">
       <transition name="view">
@@ -72,7 +73,12 @@ export default {
 
     const tableData = ref([])
     const tableRef = ref(null)
-    const formData = ref({})
+    const formData = ref({
+      title: null,
+      abstract: null,
+      content: null,
+      thumbnail: null
+    })
     const formRef = ref(null)
 
     const handleThumbnailSuccess = res => {
@@ -121,13 +127,20 @@ export default {
 
     const pagging = usePagging(fetchData)
 
-    pagging.pageChange(1)
+    pagging.reload()
 
-    const onEdit = row => {
-      const { id, title, abstract, thumbnail, content } = row
-      formData.value = { id, title, abstract, thumbnail, content }
-      formData.value.oldTitle = title
+    const onEdit = async row => {
+      const { id, title } = row
       view.value = 'edit'
+      const data = await request({
+        method: 'get',
+        url: `/api/article/detail`,
+        params: {
+          id
+        }
+      })
+      formData.value = data
+      formData.value.oldTitle = title
     }
 
     const onAdd = () => {
@@ -135,6 +148,24 @@ export default {
       nextTick(() => {
         formRef.value.resetFields()
       })
+    }
+
+    const onSave = async () => {
+      const { id, title, abstract, thumbnail, content } = formData.value
+      const method = view.value === 'edit' ? 'put' : 'post'
+      const url = `/api/article/${view.value === 'edit' ? 'update' : 'insert'}`
+      await request({
+        method,
+        url,
+        data: {
+          id,
+          title,
+          abstract,
+          thumbnail,
+          content
+        }
+      })
+      pagging.reload()
     }
 
     const onQuery = () => {
@@ -150,6 +181,7 @@ export default {
         center: true
       }).then(() => {
         deleteData(row)
+        pagging.reload()
       })
     }
 
@@ -164,6 +196,7 @@ export default {
       onAdd,
       onEdit,
       onDelete,
+      onSave,
       handleThumbnailSuccess,
       beforeThumbnailUpload
     }
@@ -224,10 +257,15 @@ export default {
   }
 
   .view-enter-active {
-    transition: all 0.7s ease;
+    transition: all 0.7s ease-in;
   }
   .view-leave-active {
-    transition: all 0.7s ease;
+    transition: all 0.7s ease-in;
+  }
+
+  .view-enter-to,
+  .view-leave-from {
+    transform: translateX(0%);
   }
 
   .view-enter-from {
