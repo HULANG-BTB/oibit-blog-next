@@ -21,7 +21,7 @@
 import { ElForm, ElFormItem, ElInput, ElButton } from 'element-plus'
 import { reactive, ref } from 'vue'
 import { useStore } from 'vuex'
-import request from '@/utils/request'
+// import request from '@/utils/request'
 import { useRoute, useRouter } from 'vue-router'
 
 export default {
@@ -48,11 +48,12 @@ export default {
     const onLogin = async () => {
       try {
         await formRef.value.validate()
-        const data = await request({
-          method: 'post',
-          url: '/api/user/login',
-          data: form.data
-        })
+        const data = await store.dispatch('user/login', form.data)
+        // const data = await request({
+        //   method: 'post',
+        //   url: '/api/user/login',
+        //   data: form.data
+        // })
         if (data.id) {
           store.commit('user/SET_AUTH', true)
           const redirect = route.query.redirect || '/'

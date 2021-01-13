@@ -1,8 +1,10 @@
-// import request from '@/utils/request'
+import request from '@/utils/request'
+import Cookies from 'js-cookie'
 
 const state = {
   isAuth: false,
-  info: {}
+  info: {},
+  accessToken: Cookies.get('accessToken') || ''
 }
 
 const getters = {
@@ -11,17 +13,19 @@ const getters = {
 }
 
 const actions = {
-  // getArticleList: async ({ commit, state }) => {
-  //   const data = await request({
-  //     method: 'post',
-  //     url: '/data/api/Article/getArticleListByPaginator',
-  //     data: {
-  //       page: state.page,
-  //       limit: state.limit
-  //     }
-  //   })
-  //   commit('SET_LIST', data.data.data)
-  // },
+  login: async ({ commit }, { username, password }) => {
+    const data = await request({
+      method: 'post',
+      url: '/api/user/login',
+      data: { username, password }
+    })
+    if (data.token) {
+      commit('SET_INFO', data)
+      commit('SET_ACCESSTOKEN', data.token)
+      commit('SET_AUTH', true)
+    }
+    return data
+  }
   // loadMoreArticle: async ({ commit, state }) => {
   //   const data = await request({
   //     method: 'post',
@@ -41,6 +45,9 @@ const mutations = {
   },
   SET_INFO: (state, info) => {
     state.info = info
+  },
+  SET_ACCESSTOKEN: (state, token) => {
+    state.accessToken = token
   }
 }
 
