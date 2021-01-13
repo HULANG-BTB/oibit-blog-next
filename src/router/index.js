@@ -25,10 +25,14 @@ router.beforeEach(async (to, from, next) => {
     if (isAuth) {
       next()
     } else {
-      const profile = await store.dispatch('user/profile')
-      if (profile.id) {
-        next()
-      } else {
+      try {
+        const profile = await store.dispatch('user/profile')
+        if (profile.id) {
+          next()
+        } else {
+          next({ name: 'Login', query: { redirect: to.fullPath } })
+        }
+      } catch {
         next({ name: 'Login', query: { redirect: to.fullPath } })
       }
     }
