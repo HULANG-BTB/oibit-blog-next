@@ -9,7 +9,12 @@
         </div>
       </div>
       <div class="content">
-        <div class="header">header</div>
+        <div class="header">
+          <div class="header-nav"></div>
+          <div class="header-user" @click="logout">
+            {{ user.username }}
+          </div>
+        </div>
         <div class="main-content">
           <router-view> </router-view>
         </div>
@@ -19,11 +24,23 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 export default {
   name: 'admin-layout',
   setup() {
     const router = useRouter()
+    const store = useStore()
+
+    const user = computed(() => {
+      return store.getters['user/profile']
+    })
+
+    const logout = async () => {
+      await store.dispatch('user/logout')
+      router.push({ name: 'Home' })
+    }
 
     const menu = {
       list: [
@@ -42,7 +59,9 @@ export default {
     }
 
     return {
-      menu
+      menu,
+      user,
+      logout
     }
   }
 }
@@ -110,9 +129,14 @@ export default {
 
       .header {
         position: fixed;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
         height: 60px;
         z-index: 1000;
+        padding: 0 2rem;
         background-color: hsla(0, 0%, 100%, 0.7);
       }
 
