@@ -21,7 +21,6 @@ instance.interceptors.request.use(
     const accessToken = store.getters['user/token']
 
     if (accessToken) {
-      console.log(accessToken)
       config.headers.Authorization = accessToken
     }
 
