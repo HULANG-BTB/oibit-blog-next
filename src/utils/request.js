@@ -1,6 +1,7 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 import { ElMessage } from 'element-plus'
+import store from '../store'
 import { throttle, debounce } from '@/utils'
 
 NProgress.configure({ showSpinner: false })
@@ -16,6 +17,13 @@ const instance = axios.create({
 instance.interceptors.request.use(
   config => {
     // do something before request is sent
+
+    const accessToken = store.getters['user/token']
+
+    if (accessToken) {
+      console.log(accessToken)
+      config.headers.Authorization = accessToken
+    }
 
     throttle(() => {
       NProgress.start()

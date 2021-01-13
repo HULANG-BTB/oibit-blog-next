@@ -9,7 +9,8 @@ const state = {
 
 const getters = {
   isAuth: state => state.isAuth,
-  info: state => state.info
+  info: state => state.info,
+  token: state => state.accessToken
 }
 
 const actions = {
