@@ -3,13 +3,13 @@ import Cookies from 'js-cookie'
 
 const state = {
   isAuth: false,
-  info: {},
+  profile: {},
   accessToken: Cookies.get('accessToken') || ''
 }
 
 const getters = {
   isAuth: state => state.isAuth,
-  info: state => state.info,
+  profile: state => state.profile,
   token: state => state.accessToken
 }
 
@@ -21,7 +21,7 @@ const actions = {
       data: { username, password }
     })
     if (data.token) {
-      commit('SET_INFO', data)
+      commit('SET_PROFILE', data)
       commit('SET_ACCESSTOKEN', data.token)
       commit('SET_AUTH', true)
     } else {
@@ -35,11 +35,21 @@ const actions = {
       url: '/api/user/profile'
     })
     if (data.id) {
-      commit('SET_INFO', data)
+      commit('SET_PROFILE', data)
       commit('SET_AUTH', true)
     } else {
       commit('SET_AUTH', false)
     }
+    return data
+  },
+  logout: async ({ commit }) => {
+    const data = await request({
+      method: 'get',
+      url: '/api/user/logout'
+    })
+    commit('SET_AUTH', false)
+    commit('SET_PROFILE', {})
+    commit('SET_ACCESSTOKEN', '')
     return data
   }
 }
@@ -48,8 +58,8 @@ const mutations = {
   SET_AUTH: (state, isAuth) => {
     state.isAuth = isAuth
   },
-  SET_INFO: (state, info) => {
-    state.info = info
+  SET_PROFILE: (state, profile) => {
+    state.profile = profile
   },
   SET_ACCESSTOKEN: (state, token) => {
     Cookies.set('accessToken', token)
