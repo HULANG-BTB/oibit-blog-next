@@ -3,7 +3,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 module.exports = {
   lintOnSave: process.env.NODE_ENV !== 'production',
-  assetsDir: 'static',
+  assetsDir: 'assets',
   productionSourceMap: false,
   devServer: {
     overlay: {
