@@ -35,7 +35,7 @@ export default {
   width: 100%;
   position: absolute;
 
-  /deep/ * {
+  :deep() * {
     max-width: 100%;
   }
 }
