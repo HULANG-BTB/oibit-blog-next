@@ -1,5 +1,6 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
+import { ElMessage } from 'element-plus'
 import { throttle, debounce } from '@/utils'
 
 NProgress.configure({ showSpinner: false })
@@ -56,7 +57,8 @@ instance.interceptors.response.use(
       NProgress.done()
     })()
     if (res.code !== 200) {
-      return res.error
+      ElMessage.error(res.error)
+      throw new Error(res.error)
     }
     return res.data
   },
