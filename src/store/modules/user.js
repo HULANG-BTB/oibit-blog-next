@@ -25,18 +25,18 @@ const actions = {
       commit('SET_AUTH', true)
     }
     return data
+  },
+  profile: async ({ commit }) => {
+    const data = await request({
+      method: 'get',
+      url: '/api/user/profile'
+    })
+    if (data.id) {
+      commit('SET_INFO', data)
+      commit('SET_AUTH', true)
+    }
+    return data
   }
-  // loadMoreArticle: async ({ commit, state }) => {
-  //   const data = await request({
-  //     method: 'post',
-  //     url: '/data/api/Article/getArticleListByPaginator',
-  //     data: {
-  //       page: ++state.page,
-  //       limit: state.limit
-  //     }
-  //   })
-  //   commit('APPEND_LIST', data.data.data)
-  // }
 }
 
 const mutations = {
@@ -47,6 +47,7 @@ const mutations = {
     state.info = info
   },
   SET_ACCESSTOKEN: (state, token) => {
+    Cookies.set('accessToken', token)
     state.accessToken = token
   }
 }
