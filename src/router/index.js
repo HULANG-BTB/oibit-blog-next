@@ -15,18 +15,22 @@ const router = createRouter({
   }
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   throttle(() => {
     NProgress.start()
   })()
-  console.log(to)
   const needAuth = to.meta?.needAuth
   if (needAuth) {
     const isAuth = store.getters['user/isAuth']
     if (isAuth) {
       next()
     } else {
-      next({ name: 'Login', query: { redirect: to.fullPath } })
+      const profile = await store.dispatch('user/profile')
+      if (profile.id) {
+        next()
+      } else {
+        next({ name: 'Login', query: { redirect: to.fullPath } })
+      }
     }
   } else {
     next()

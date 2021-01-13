@@ -24,6 +24,8 @@ const actions = {
       commit('SET_INFO', data)
       commit('SET_ACCESSTOKEN', data.token)
       commit('SET_AUTH', true)
+    } else {
+      commit('SET_AUTH', false)
     }
     return data
   },
@@ -35,6 +37,8 @@ const actions = {
     if (data.id) {
       commit('SET_INFO', data)
       commit('SET_AUTH', true)
+    } else {
+      commit('SET_AUTH', false)
     }
     return data
   }
