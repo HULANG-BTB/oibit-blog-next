@@ -36,7 +36,7 @@
         </div>
         <div class="article-edit" v-else>
           <el-form ref="formRef" :model="formData" size="small" label-width="100px">
-            <el-form-item label="缩略图">
+            <el-form-item label="缩略图" prop="thumbnail">
               <el-upload class="image-uploader" action="/api/upload/images" :show-file-list="false" :on-success="handleThumbnailSuccess" :before-upload="beforeThumbnailUpload">
                 <img v-if="formData.thumbnail" :src="formData.thumbnail" class="image" />
                 <i v-else class="el-icon-plus image-uploader-icon"></i>
@@ -140,35 +140,43 @@ export default {
         }
       })
       formData.value = data
+      Object.keys(formData.value).forEach(key => {
+        formData.value[key] = data[key] || ''
+      })
       formData.value.oldTitle = title
     }
 
     const onAdd = () => {
       view.value = 'add'
-      nextTick(() => {
-        formRef.value.resetFields()
-      })
     }
 
     const onSave = async () => {
       const { id, title, abstract, thumbnail, content } = formData.value
       const method = view.value === 'edit' ? 'put' : 'post'
       const url = `/api/article/${view.value === 'edit' ? 'update' : 'insert'}`
-      await request({
-        method,
-        url,
-        data: {
-          id,
-          title,
-          abstract,
-          thumbnail,
-          content
-        }
-      })
-      pagging.reload()
+      try {
+        await request({
+          method,
+          url,
+          data: {
+            id,
+            title,
+            abstract,
+            thumbnail,
+            content
+          }
+        })
+        ElMessage.success('保存成功!')
+        onQuery()
+        pagging.reload()
+      } catch (e) {
+        ElMessage.drror(e.message)
+      }
     }
 
-    const onQuery = () => {
+    const onQuery = async () => {
+      formRef.value.resetFields()
+      await nextTick()
       view.value = 'list'
     }
 
