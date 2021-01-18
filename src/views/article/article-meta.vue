@@ -9,7 +9,7 @@
       </div>
       <div class="item">
         <p>
-          文章地址：<a :href="`https://oibit.cn/Article/${article.id}`">https://oibit.cn/Article/{{ article.id }}</a>
+          文章地址：<a :href="`https://oibit.cn/Article/${article.id}`" target="_blank">https://oibit.cn/Article/{{ article.id }}</a>
         </p>
       </div>
       <div class="item">
