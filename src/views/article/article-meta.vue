@@ -46,14 +46,15 @@ export default {
 
 <style lang="scss" scoped>
 .article-meta {
+  margin: 1rem 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  width: 100%;
+
   .meta {
-    box-sizing: border-box;
-    background-color: #fff;
-    width: 100%;
     padding: 1rem;
     font-size: 0.8rem;
     font-size: 0.8rem;
-    margin: 1rem 0 2rem 0;
     padding: 0.3rem 1rem;
 
     .item {
