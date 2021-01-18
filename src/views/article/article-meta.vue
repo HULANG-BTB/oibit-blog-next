@@ -2,10 +2,10 @@
   <div class="article-meta">
     <div class="meta">
       <div class="item">
-        <p>发表时间：{{ article.create_time }}</p>
+        <p>发表时间：{{ dateTimeFormat(article.create_time) }}</p>
       </div>
       <div class="item">
-        <p>最后修改：{{ article.update_time }}</p>
+        <p>最后修改：{{ dateTimeFormat(article.update_time) }}</p>
       </div>
       <div class="item">
         <p>
@@ -23,12 +23,22 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'ArticleMeta',
   props: {
     article: {
       type: Object,
       required: true
+    }
+  },
+  setup() {
+    const dateTimeFormat = date => {
+      return moment(date).format('yyyy-MM-DD hh:mm:ss')
+    }
+    return {
+      dateTimeFormat
     }
   }
 }
