@@ -7,6 +7,7 @@
           <div ref="contentElementRef" v-html="content" class="markdown-body"></div>
         </div>
       </div>
+      <article-share :article="article"></article-share>
       <article-meta :article="article"></article-meta>
     </div>
     <div class="aside-content">
@@ -24,6 +25,7 @@ import { computed, ref } from 'vue'
 import marked from 'marked'
 import ArticleMenu from './article-menu'
 import ArticleMeta from './article-meta'
+import ArticleShare from './article-share'
 import { article, queryArticleInfo } from './useArticle'
 
 import hljs from 'highlight.js'
@@ -32,7 +34,7 @@ import javascript from 'highlight.js/lib/languages/htmlbars'
 hljs.registerLanguage('vue', javascript)
 
 export default {
-  components: { ArticleMenu, ArticleMeta },
+  components: { ArticleMenu, ArticleMeta, ArticleShare },
   name: 'ArticleDetail',
   setup() {
     const route = useRoute()
