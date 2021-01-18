@@ -17,7 +17,7 @@
             <el-table-column label="序号" width="80" align="center" prop="id"></el-table-column>
             <el-table-column label="标题" prop="title"> </el-table-column>
             <el-table-column label="操作" align="center" width="200">
-              <template #default="scope">
+              <template #default="scope" fixed="right">
                 <el-button size="mini" type="primary" @click="onEdit(scope.row)">编辑</el-button>
                 <el-button size="mini" type="danger" @click="onDelete(scope.row)">删除</el-button>
               </template>
@@ -63,7 +63,7 @@ import PanelLayout from '@/layout/panel-layout'
 import { ElTable, ElTableColumn, ElButton, ElPagination, ElMessageBox, ElForm, ElFormItem, ElInput, ElUpload, ElMessage } from 'element-plus'
 import usePagging from './usePagging'
 import request from '@/utils/request'
-import { nextTick, ref } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
 
 export default {
   name: 'article-admin',
@@ -128,6 +128,10 @@ export default {
     const pagging = usePagging(fetchData)
 
     pagging.reload()
+
+    onMounted(() => {
+      tableRef.value.doLayout()
+    })
 
     const onEdit = async row => {
       const { id, title } = row
