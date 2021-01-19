@@ -218,8 +218,6 @@ export default {
 
 <style lang="scss" scoped>
 .article-admin {
-  padding: 0.5rem;
-
   .page-content {
     width: 100%;
     max-width: 100%;
