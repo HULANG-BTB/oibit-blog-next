@@ -23,6 +23,7 @@ export default {
 
 <style lang="scss" scoped>
 .panel-layout {
+  padding: 0.5rem;
   width: 100%;
 
   .title {
