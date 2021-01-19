@@ -59,9 +59,9 @@ export default {
           active: route.path === '/Admin/Article'
         },
         {
-          title: '缩略图管理',
-          path: '/Admin/Thumbnail',
-          active: route.path === '/Admin/Thumbnail'
+          title: '轮播图管理',
+          path: '/Admin/Carousel',
+          active: route.path === '/Admin/Carousel'
         }
       ],
       click: item => {

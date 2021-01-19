@@ -34,6 +34,14 @@ export default [
         meta: {
           needAuth: true
         }
+      },
+      {
+        path: 'Carousel',
+        name: 'CarouselAdmin',
+        component: asyncComponents['carousel-admin'],
+        meta: {
+          needAuth: true
+        }
       }
     ]
   },
