@@ -44,7 +44,7 @@ export default {
   background-image: url('../assets/img/background.png');
 
   .header {
-    z-index: 20000;
+    z-index: 200;
     position: fixed;
     height: 60px;
     width: 100vw;

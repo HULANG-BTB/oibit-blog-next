@@ -1,16 +1,20 @@
 <template>
   <div class="admin-layout">
     <div class="admin-container">
-      <div class="aside" v-if="false">
+      <!-- <div class="aside">
         <div class="menu">
           <ul>
             <li class="unselected" v-for="item in menu.list" :key="item.title" @click="menu.click(item)">{{ item.title }}</li>
           </ul>
         </div>
-      </div>
+      </div> -->
       <div class="content">
         <div class="header">
-          <div class="header-nav"></div>
+          <div class="header-nav">
+            <ul class="menu">
+              <li class="menu-item unselected" v-for="item in menu.list" :key="item.title" @click="menu.click(item)" :class="{ active: item.active }">{{ item.title }}</li>
+            </ul>
+          </div>
           <div class="header-user" @click="logout">
             {{ user.username }}
           </div>
@@ -25,12 +29,13 @@
 
 <script>
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 export default {
   name: 'admin-layout',
   setup() {
     const router = useRouter()
+    const route = useRoute()
     const store = useStore()
 
     const user = computed(() => {
@@ -50,10 +55,18 @@ export default {
         // },
         {
           title: '文章管理',
-          path: '/Admin/Article'
+          path: '/Admin/Article',
+          active: route.path === '/Admin/Article'
+        },
+        {
+          title: '缩略图管理',
+          path: '/Admin/Thumbnail',
+          active: route.path === '/Admin/Thumbnail'
         }
       ],
       click: item => {
+        menu.list.forEach(el => (el.active = false))
+        item.active = true
         router.push(item.path)
       }
     }
@@ -85,41 +98,6 @@ export default {
     min-width: 100vw;
     overflow: hidden;
 
-    .aside {
-      width: 300px;
-      min-height: 100vh;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-color: rgba($color: #000000, $alpha: 0.6);
-
-      .menu {
-        margin-top: 4rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #eee;
-
-        ul {
-          width: 100%;
-          li {
-            min-height: 2.5rem;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            width: 100%;
-            padding-left: 2rem;
-            transition: all 0.3s ease-in;
-            font-size: 1.2rem;
-
-            &:hover {
-              background-color: rgba($color: #000000, $alpha: 0.4);
-            }
-          }
-        }
-      }
-    }
-
     .content {
       width: 0;
       position: relative;
@@ -135,9 +113,46 @@ export default {
         justify-content: space-between;
         width: 100%;
         height: 60px;
-        z-index: 1000;
+        z-index: 200;
         padding: 0 2rem;
         background-color: hsla(0, 0%, 100%, 0.7);
+
+        .header-nav {
+          width: 0;
+          height: 100%;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+
+          .menu {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+
+            .menu-item {
+              height: 100%;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+              padding: 0 2rem;
+              border-bottom: transparent 2px solid;
+              transition: all 0.3s ease;
+
+              &.active {
+                border-bottom: rgb(99, 194, 218) 2px solid;
+              }
+
+              &:hover {
+                border-bottom: rgb(236, 29, 150) 2px solid;
+              }
+            }
+          }
+        }
       }
 
       .main-content {
