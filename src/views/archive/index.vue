@@ -11,7 +11,7 @@
         </timeline>
       </div>
     </div>
-    <div class="aside-content"></div>
+    <!-- <div class="aside-content"></div> -->
   </div>
 </template>
 
@@ -83,9 +83,9 @@ Timeline
     }
   }
 
-  .aside-content {
-    width: 220px;
-    min-width: 220px;
-  }
+  // .aside-content {
+  //   width: 220px;
+  //   min-width: 220px;
+  // }
 }
 </style>

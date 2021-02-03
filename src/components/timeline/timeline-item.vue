@@ -92,9 +92,9 @@ export default {
   }
   .content:before {
     border-right-color: inherit;
-    border-width: 20px;
+    border-width: 12px;
     top: 50%;
-    margin-top: -20px;
+    margin-top: -13px;
   }
   .content:after {
     border-right-color: rgba($color: #000000, $alpha: 0);
