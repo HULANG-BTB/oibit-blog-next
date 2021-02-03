@@ -21,18 +21,20 @@ export default {
 
   &:hover {
     .tips {
-      display: block;
+      // display: block;
       opacity: 1;
+      z-index: 999;
     }
   }
 
   .tips {
-    display: none;
+    // display: none;
+    opacity: 0;
+    z-index: -1;
     transition: all 0.3s ease-in-out;
     top: 0;
     left: 50%;
     transform: translateY(-110%) translateX(-50%);
-    opacity: 0;
     position: absolute;
     background-color: rgba($color: #000000, $alpha: 0.2);
     border-radius: 5px;
