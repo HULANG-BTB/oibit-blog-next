@@ -33,7 +33,7 @@ export default {
           route: 'Category'
         },
         {
-          title: 'Backend',
+          title: 'Tags',
           icon: 'icon-tag',
           route: 'Tag'
         },

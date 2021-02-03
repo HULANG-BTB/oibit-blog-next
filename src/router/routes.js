@@ -72,7 +72,7 @@ export default [
       {
         path: 'Tag',
         name: 'Tag',
-        component: asyncComponents['article']
+        component: asyncComponents['tag']
       },
       {
         path: 'Archive',
