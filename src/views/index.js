@@ -6,5 +6,6 @@ export default {
   'article-admin': () => import(/* webpackChunkName: "article-admin" */ './admin/article'),
   login: () => import(/* webpackChunkName: "login" */ './login'),
   'carousel-admin': () => import(/* webpackChunkName: "carousel-admin" */ './admin/carousel'),
-  tag: () => import(/* webpackChunkName: "carousel-admin" */ './tag')
+  'tag-list': () => import(/* webpackChunkName: "tag-list" */ './tag'),
+  'router-view': () => import(/* webpackChunkName: "router-view" */ './router')
 }

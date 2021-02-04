@@ -3,31 +3,49 @@
     <div class="main-content">
       <div class="tags">
         <div v-for="(item, index) in data" :key="index" class="tag">
-          <span :class="item.color" :style="{ fontSize: item.fontSize }">({{ item.nums }})</span>
+          <span :class="item.color" :style="{ fontSize: item.fontSize, lineHeight: item.fontSize }" @click="onTagClick(item)">{{ `${item.name} (${item.nums})` }}</span>
         </div>
       </div>
     </div>
+    <div class="aside-content"></div>
   </div>
 </template>
 
 <script>
+import { computed } from 'vue'
+import Tag from './useTag'
+import { useRouter } from 'vue-router'
+
 export default {
   name: 'Tag',
   setup() {
-    const data = []
+    const router = useRouter()
     const color = ['orange', 'primary', 'success', 'warn', 'danger']
-    for (let i = 0; i < 30; i++) {
-      data.push({
-        nums: Math.floor(Math.random() * 20),
-        color: color[i % 5]
+
+    const data = computed(() => {
+      const tags = Tag.tags.value || []
+      tags.forEach((tag, index) => {
+        tag.color = color[index % 5]
+        tag.nums = tag.ArticleTags.length ?? 0
       })
-    }
-    const max = Math.max(...data.map(item => item.nums))
-    data.forEach(item => {
-      item.fontSize = item.nums / max + 1 + 'rem'
+      const max = Math.max(...tags.map(item => item.nums))
+      tags.forEach(tag => {
+        tag.fontSize = tag.nums / max + 1 + 'rem'
+      })
+      return tags
     })
-    console.log(data)
-    return { data }
+    Tag.getTags()
+    const onTagClick = item => {
+      // router.push({
+      //   name: 'TagArticle',
+      //   params: {
+      //     Tag: item.name
+      //   }
+      // })
+      router
+      console.log(item)
+    }
+    return { data, Tag, onTagClick }
   }
 }
 </script>
@@ -55,16 +73,21 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0.5rem 0.5rem;
-        padding: 0.2rem 0.5rem;
-        transition: all 0.3s ease-in;
+        margin: 0.5rem 0;
+        padding: 0.2rem 1rem;
+        transition: background-color 0.3s ease-in, border-radius 0.3s ease-in 0.2s;
 
         &:hover {
-          background-color: rgba($color: #fff, $alpha: 0.8);
-          border-radius: 0.7rem 0.7rem;
+          background-color: rgba($color: #fff, $alpha: 0.6);
+          border-radius: 0.7rem;
         }
       }
     }
+  }
+
+  .aside-content {
+    width: 220px;
+    min-width: 220px;
   }
 }
 </style>

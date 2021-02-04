@@ -45,7 +45,6 @@ router.afterEach(() => {
   debounce(() => {
     NProgress.done()
   })()
-  NProgress.done()
 })
 
 export default router

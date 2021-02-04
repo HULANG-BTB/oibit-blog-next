@@ -72,7 +72,15 @@ export default [
       {
         path: 'Tag',
         name: 'Tag',
-        component: asyncComponents['tag']
+        redirect: { name: 'TagList' },
+        component: asyncComponents['router-view'],
+        children: [
+          {
+            path: 'List',
+            name: 'TagList',
+            component: asyncComponents['tag-list']
+          }
+        ]
       },
       {
         path: 'Archive',
