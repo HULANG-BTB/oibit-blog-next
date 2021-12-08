@@ -12,18 +12,18 @@ module.exports = {
     },
     proxy: {
       '^/api': {
-        target: 'http://localhost:3000',
+        target: 'https://oibit.cn',
         changeOrgin: true
       },
       '^/static': {
-        target: 'http://localhost:3000',
+        target: 'https://oibit.cn',
         changeOrgin: true
       }
     }
   },
   chainWebpack: config => {
     config.externals({
-      moment: 'moment'
+      dayjs: 'dayjs'
     })
 
     config.when(env === 'production', config => {
