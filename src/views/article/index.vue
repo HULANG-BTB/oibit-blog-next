@@ -21,7 +21,7 @@
 <script>
 // import data from './data'
 import { useRoute } from 'vue-router'
-import { computed, ref } from 'vue'
+import { ref, watch } from 'vue'
 import marked from 'marked'
 import ArticleMenu from './article-menu'
 import ArticleMeta from './article-meta'
@@ -44,25 +44,32 @@ export default {
 
     const menuData = ref([])
 
-    const content = computed(() => {
-      menuData.value.splice(0, menuData.value.length)
-      const renderer = new marked.Renderer()
-      renderer.heading = (text, level) => {
-        menuData.value.push({
-          text,
-          level
-        })
-        return `<h${level} id="${text}">${text}</h${level}>`
+    const content = ref('')
+
+    watch(
+      () => {
+        return article.value
+      },
+      () => {
+        menuData.value.splice(0, menuData.value.length)
+        const renderer = new marked.Renderer()
+        renderer.heading = (text, level) => {
+          menuData.value.push({
+            text,
+            level
+          })
+          return `<h${level} id="${text}">${text}</h${level}>`
+        }
+        renderer.code = (code, lang) => {
+          code = lang ? hljs.highlight(lang, code).value : code
+          return `<pre><code lang="${lang}">${code}</code></pre>`
+        }
+        renderer.link = (href, title, text) => {
+          return `<a href="${href}" target="_blank">${text}</a>`
+        }
+        content.value = marked(article.value.content || '', { renderer })
       }
-      renderer.code = (code, lang) => {
-        code = lang ? hljs.highlight(lang, code).value : code
-        return `<pre><code lang="${lang}">${code}</code></pre>`
-      }
-      renderer.link = (href, title, text) => {
-        return `<a href="${href}" target="_blank">${text}</a>`
-      }
-      return marked(article.value.content || '', { renderer })
-    })
+    )
 
     return {
       article,
