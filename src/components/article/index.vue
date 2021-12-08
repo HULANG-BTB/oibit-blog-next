@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 export default {
   name: 'Article',
@@ -50,7 +50,7 @@ export default {
     }
 
     const formatDate = date => {
-      return moment(date).fromNow()
+      return dayjs(date).fromNow()
     }
 
     return {

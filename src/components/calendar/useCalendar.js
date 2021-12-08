@@ -1,13 +1,13 @@
 import { reactive } from 'vue'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 const calendar = reactive({
-  date: moment(),
+  date: dayjs(),
   selectedYear: true,
   selectedMonth: true,
-  year: moment().year(),
-  month: moment().month() + 1,
-  day: moment().date(),
+  year: dayjs().year(),
+  month: dayjs().month() + 1,
+  day: dayjs().date(),
   yearList: [],
   monthList: [],
   dayList: [],
@@ -44,7 +44,7 @@ const onDay = day => {
   calendar.animation = 'in'
   // context.emit(
   //   'onDate',
-  //   moment()
+  //   dayjs()
   //     .year(calendar.year)
   //     .month(calendar.month - 1)
   //     .day(calendar.day - 1)
@@ -71,7 +71,7 @@ const initMonth = () => {
 
 const initDay = () => {
   calendar.dayList.length = 0
-  const firstDay = moment(calendar.date)
+  const firstDay = dayjs(calendar.date)
     .year(calendar.year)
     .month(calendar.month - 1)
     .date(0)

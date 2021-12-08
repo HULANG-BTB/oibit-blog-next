@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 export default {
   name: 'ArticleMeta',
@@ -35,7 +35,7 @@ export default {
   },
   setup() {
     const dateTimeFormat = date => {
-      return moment(date).format('yyyy-MM-DD hh:mm:ss')
+      return dayjs(date).format('yyyy-MM-DD hh:mm:ss')
     }
     return {
       dateTimeFormat

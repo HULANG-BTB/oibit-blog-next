@@ -85,7 +85,6 @@ export default {
       if (res.code !== 200) {
         ElMessage.error(res.error)
       } else {
-        console.log(res.data[0]?.url)
         formData.value.thumbnail = res.data[0]?.url
       }
     }
@@ -118,11 +117,10 @@ export default {
 
     const deleteData = async row => {
       const { id } = row
-      const data = await request({
+      await request({
         method: 'delete',
         url: `/api/article/delete/${id}`
       })
-      console.log(data)
     }
 
     const pagging = usePagging(fetchData)
@@ -185,7 +183,6 @@ export default {
     }
 
     const onDelete = row => {
-      console.log(row)
       ElMessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

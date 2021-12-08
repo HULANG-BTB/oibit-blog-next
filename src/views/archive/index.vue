@@ -18,7 +18,7 @@
 <script>
 import { timeline, timelineItem } from '@/components/timeline'
 import useArticle from './useArchive'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { useRouter } from 'vue-router'
 
 export default {
@@ -29,7 +29,7 @@ export default {
     useArticle.queryArchiveInfo()
 
     const formatDate = date => {
-      return moment(date).format('YYYY-MM-DD')
+      return dayjs(date).format('YYYY-MM-DD')
     }
 
     const onArticleRead = article => {
