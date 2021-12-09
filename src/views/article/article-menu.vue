@@ -3,7 +3,7 @@
     <div class="title">目录</div>
     <ul class="nav">
       <li v-for="item in menu" :key="item.text">
-        <a :href="`#${item.text}`" :style="{ marginLeft: (item.level - 1) * 7 + 'px' }">{{ item.text }}</a>
+        <a @click="onTitleClick(item.id)" :style="{ marginLeft: (item.level - 1) * 7 + 'px' }">{{ item.text }}</a>
       </li>
     </ul>
   </div>
@@ -36,8 +36,18 @@ export default {
       })
     })
 
+    const onTitleClick = id => {
+      const el = document.querySelector(`#${id}`)
+      if (el) {
+        const { offsetTop } = el
+        const top = offsetTop > 80 ? offsetTop - 80 : offsetTop
+        window.scrollTo({ top, behavior: 'smooth' })
+      }
+    }
+
     return {
-      scrollTop
+      scrollTop,
+      onTitleClick
     }
   }
 }

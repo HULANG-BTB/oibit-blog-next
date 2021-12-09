@@ -32,6 +32,7 @@ import { article, queryArticleInfo } from './useArticle'
 import Prismjs from 'prismjs'
 import 'prismjs/plugins/line-numbers/prism-line-numbers'
 import { Renderer } from './renderer'
+import md5 from 'js-md5'
 
 export default {
   components: { ArticleMenu, ArticleMeta, ArticleShare, ElDialog },
@@ -57,11 +58,13 @@ export default {
         menuData.value.splice(0, menuData.value.length)
         const renderer = new Renderer()
         renderer.heading = (text, level) => {
+          const id = `heading-${md5(text)}`
           menuData.value.push({
             text,
-            level
+            level,
+            id
           })
-          return `<h${level} id="${text}">${text}</h${level}>`
+          return `<h${level} id="${id}">${text}</h${level}>`
         }
 
         marked(
