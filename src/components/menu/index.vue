@@ -27,11 +27,11 @@ export default {
           icon: 'icon-home',
           route: 'Home'
         },
-        {
-          title: 'Frontend',
-          icon: 'icon-table',
-          route: 'Category'
-        },
+        // {
+        //   title: 'Frontend',
+        //   icon: 'icon-table',
+        //   route: 'Category'
+        // },
         {
           title: '标签',
           icon: 'icon-tag',

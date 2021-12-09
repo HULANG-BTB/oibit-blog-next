@@ -193,12 +193,6 @@ blockquote {
   background-color: #f8f8f8;
 }
 
-code {
-  padding: 3px 5px;
-  border-radius: 3px;
-  text-indent: 0;
-}
-
 h1,
 h2,
 h3,
@@ -239,5 +233,9 @@ p {
 
   code {
     background-color: #ececec;
+    padding: 3px 5px;
+    margin: 0 5px;
+    border-radius: 3px;
+    text-indent: 0;
   }
 }
