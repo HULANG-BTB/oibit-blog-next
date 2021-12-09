@@ -35,7 +35,7 @@ export default {
   },
   setup() {
     const dateTimeFormat = date => {
-      return dayjs(date).format('yyyy-MM-DD hh:mm:ss')
+      return dayjs(date).format('YYYY-MM-DD hh:mm:ss')
     }
     return {
       dateTimeFormat

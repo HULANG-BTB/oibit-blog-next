@@ -14,6 +14,10 @@ module.exports = {
       '^/api': {
         target: 'https://oibit.cn',
         changeOrgin: true
+      },
+      '^/static': {
+        target: 'https://oibit.cn',
+        changeOrgin: true
       }
     }
   },
