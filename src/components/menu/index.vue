@@ -23,7 +23,7 @@ export default {
     const menu = reactive({
       menus: [
         {
-          title: 'Article',
+          title: '文章',
           icon: 'icon-home',
           route: 'Home'
         },
@@ -33,17 +33,17 @@ export default {
           route: 'Category'
         },
         {
-          title: 'Tags',
+          title: '标签',
           icon: 'icon-tag',
           route: 'Tag'
         },
         {
-          title: 'Archive',
+          title: '归档',
           icon: 'icon-document',
           route: 'Archive'
         },
         {
-          title: 'About',
+          title: '关于',
           icon: 'icon-user',
           route: 'About'
         }

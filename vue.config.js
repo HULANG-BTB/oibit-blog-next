@@ -14,10 +14,6 @@ module.exports = {
       '^/api': {
         target: 'https://oibit.cn',
         changeOrgin: true
-      },
-      '^/static': {
-        target: 'https://oibit.cn',
-        changeOrgin: true
       }
     }
   },
@@ -36,5 +32,12 @@ module.exports = {
         })
       )
     })
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        implementation: require('sass') // This line must in sass option
+      }
+    }
   }
 }
