@@ -72,6 +72,7 @@ export default {
           {
             renderer,
             highlight: (code, lang, callback) => {
+              if (lang === 'vue') lang = 'html'
               const out = Prismjs.highlight(code, Prismjs.languages[lang] || Prismjs.languages.txt, lang)
               callback(null, out)
             }
