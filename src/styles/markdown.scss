@@ -99,85 +99,92 @@
     white-space: normal;
   }
 
-  .token.comment,
-  .token.prolog,
-  .token.doctype,
-  .token.cdata,
-  .token.punctuation {
-    color: #65676b;
+  .token {
+    &.comment,
+    &.prolog,
+    &.doctype,
+    &.cdata,
+    &.punctuation {
+      color: #65676b;
+    }
+
+    &.namespace {
+      opacity: 0.7;
+    }
+
+    &.property,
+    &.tag,
+    &.boolean,
+    &.number,
+    &.constant,
+    &.symbol,
+    &.deleted,
+    &.imports {
+      color: #de456b;
+    }
+
+    &.selector,
+    &.attr-name,
+    &.string,
+    &.char,
+    &.builtin,
+    &.inserted {
+      color: #37ae6f;
+    }
+
+    &.operator,
+    &.entity,
+    &.url {
+      color: #65676b;
+    }
+
+    &.atrule,
+    &.attr-value,
+    &.keyword {
+      color: #24b5a8;
+    }
+
+    &.function,
+    &.class-name {
+      color: #3398db !important;
+    }
+
+    &.regex,
+    &.important,
+    &.variable,
+    &.control-flow {
+      color: #e90;
+    }
+
+    &.important,
+    &.bold {
+      font-weight: bold;
+    }
+
+    &.italic {
+      font-style: italic;
+    }
+
+    &.entity {
+      cursor: help;
+    }
+
+    &.parameter {
+      color: #de456b;
+    }
+
+    &.property-access {
+      color: #d26d32;
+    }
+
+    &.known-class-name {
+      color: #935cd1 !important;
+    }
   }
 
-  .token.namespace {
-    opacity: 0.7;
-  }
-
-  .token.property,
-  .token.tag,
-  .token.boolean,
-  .token.number,
-  .token.constant,
-  .token.symbol,
-  .token.deleted {
-    color: #de456b;
-  }
-
-  .token.selector,
-  .token.attr-name,
-  .token.string,
-  .token.char,
-  .token.builtin,
-  .token.inserted {
-    color: #37ae6f;
-  }
-
-  .token.operator,
-  .token.entity,
-  .token.url,
   .language-css .token.string,
   .style .token.string {
     color: #65676b;
-  }
-
-  .token.atrule,
-  .token.attr-value,
-  .token.keyword {
-    color: #24b5a8;
-  }
-
-  .token.function,
-  .token.class-name {
-    color: #3398db !important;
-  }
-
-  .token.regex,
-  .token.important,
-  .token.variable,
-  .token.control-flow {
-    color: #e90;
-  }
-
-  .token.important,
-  .token.bold {
-    font-weight: bold;
-  }
-  .token.italic {
-    font-style: italic;
-  }
-
-  .token.entity {
-    cursor: help;
-  }
-
-  .token.parameter {
-    color: #de456b;
-  }
-
-  .token.property-access {
-    color: #d26d32 !important;
-  }
-
-  .token.known-class-name {
-    color: #935cd1 !important;
   }
 }
 
@@ -238,4 +245,9 @@ p {
     border-radius: 3px;
     text-indent: 0;
   }
+}
+
+
+ul {
+  margin: 10px 0;
 }
