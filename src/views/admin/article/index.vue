@@ -11,49 +11,47 @@
       <el-button v-if="view !== 'list'" size="mini" type="success" @click="onSave">保存</el-button>
     </template>
     <div class="page-content">
-      <transition name="view">
-        <div class="article-list" v-if="view === 'list'">
-          <el-table ref="tableRef" :data="tableData" border style="width: 100%" size="small">
-            <el-table-column label="序号" width="80" align="center" prop="id"></el-table-column>
-            <el-table-column label="标题" prop="title"> </el-table-column>
-            <el-table-column label="操作" align="center" width="200">
-              <template #default="scope" fixed="right">
-                <el-button size="mini" type="primary" @click="onEdit(scope.row)">编辑</el-button>
-                <el-button size="mini" type="danger" @click="onDelete(scope.row)">删除</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-          <el-pagination
-            class="pagination"
-            background
-            layout="prev, pager, next, sizes, jumper"
-            :current-page="pagging.page"
-            :total="pagging.total"
-            @size-change="pagging.sizeChange"
-            @current-change="pagging.pageChange"
-          >
-          </el-pagination>
-        </div>
-        <div class="article-edit" v-else>
-          <el-form ref="formRef" :model="formData" size="small" label-width="100px">
-            <el-form-item label="缩略图" prop="thumbnail">
-              <el-upload class="image-uploader" action="/api/upload/images" :show-file-list="false" :on-success="handleThumbnailSuccess" :before-upload="beforeThumbnailUpload">
-                <img v-if="formData.thumbnail" :src="formData.thumbnail" class="image" />
-                <i v-else class="el-icon-plus image-uploader-icon"></i>
-              </el-upload>
-            </el-form-item>
-            <el-form-item label="标题" prop="title">
-              <el-input v-model="formData.title"></el-input>
-            </el-form-item>
-            <el-form-item label="摘要" prop="abstract">
-              <el-input v-model="formData.abstract" type="textarea" :autosize="{ minRows: 5 }" max-length="120"></el-input>
-            </el-form-item>
-            <el-form-item label="内容" prop="content">
-              <el-input v-model="formData.content" type="textarea" :autosize="{ minRows: 10 }"></el-input>
-            </el-form-item>
-          </el-form>
-        </div>
-      </transition>
+      <div class="article-list" v-if="view === 'list'">
+        <el-table :data="table.data" border style="width: 100%" size="small">
+          <el-table-column label="序号" width="80" align="center" prop="id"></el-table-column>
+          <el-table-column label="标题" prop="title"> </el-table-column>
+          <el-table-column label="操作" align="center" width="200">
+            <template #default="scope" fixed="right">
+              <el-button size="mini" type="primary" @click="onEdit(scope.row)">编辑</el-button>
+              <el-button size="mini" type="danger" @click="onDelete(scope.row)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-pagination
+          class="pagination"
+          background
+          :page-size="page.size"
+          :current-page="page.page"
+          :page-sizes="page.sizes"
+          :total="page.total"
+          @current-change="page.currentChange"
+          @size-change="page.sizeChange"
+        />
+      </div>
+      <div class="article-edit" v-else>
+        <el-form ref="formRef" :model="formData" size="small" label-width="100px">
+          <el-form-item label="缩略图" prop="thumbnail">
+            <el-upload class="image-uploader" action="/api/upload/images" :show-file-list="false" :on-success="handleThumbnailSuccess" :before-upload="beforeThumbnailUpload">
+              <img v-if="formData.thumbnail" :src="formData.thumbnail" class="image" />
+              <i v-else class="el-icon-plus image-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="标题" prop="title">
+            <el-input v-model="formData.title"></el-input>
+          </el-form-item>
+          <el-form-item label="摘要" prop="abstract">
+            <el-input v-model="formData.abstract" type="textarea" :autosize="{ minRows: 5 }" max-length="120"></el-input>
+          </el-form-item>
+          <el-form-item label="内容" prop="content">
+            <el-input v-model="formData.content" type="textarea" :autosize="{ minRows: 10 }"></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
     </div>
   </panel-layout>
 </template>
@@ -61,9 +59,9 @@
 <script>
 import PanelLayout from '@/layout/panel-layout'
 import { ElTable, ElTableColumn, ElButton, ElPagination, ElMessageBox, ElForm, ElFormItem, ElInput, ElUpload, ElMessage } from 'element-plus'
-import usePagging from './usePagging'
+import { usePage } from './usePage'
 import request from '@/utils/request'
-import { nextTick, onMounted, ref } from 'vue'
+import { nextTick, reactive, ref, onMounted } from 'vue'
 
 export default {
   name: 'article-admin',
@@ -71,9 +69,9 @@ export default {
   setup() {
     const view = ref('list')
 
-    const tableData = ref([])
-    const tableRef = ref(null)
-    const formData = ref({
+    const { page, fetchData, table, refresh } = usePage()
+
+    const formData = reactive({
       title: null,
       abstract: null,
       content: null,
@@ -85,7 +83,7 @@ export default {
       if (res.code !== 200) {
         ElMessage.error(res.error)
       } else {
-        formData.value.thumbnail = res.data[0]?.url
+        formData.thumbnail = res.data[0]?.url
       }
     }
 
@@ -102,19 +100,6 @@ export default {
       return isImage && isLt5M
     }
 
-    const fetchData = async (page, limit) => {
-      const data = await request({
-        method: 'get',
-        url: '/api/article/list',
-        params: {
-          page,
-          limit
-        }
-      })
-      tableData.value = data.rows
-      return { page: data.page, limit: data.limit, total: data.count }
-    }
-
     const deleteData = async row => {
       const { id } = row
       await request({
@@ -123,13 +108,19 @@ export default {
       })
     }
 
-    const pagging = usePagging(fetchData)
-
-    pagging.reload()
-
-    onMounted(() => {
-      tableRef.value.doLayout()
+    fetchData(async () => {
+      const data = await request({
+        method: 'get',
+        url: '/api/article/list',
+        params: {
+          page: page.page,
+          limit: page.size
+        }
+      })
+      return { page: data.page, size: data.limit, total: data.count, rows: data.rows }
     })
+
+    onMounted(refresh)
 
     const onEdit = async row => {
       const { id, title } = row
@@ -141,11 +132,10 @@ export default {
           id
         }
       })
-      formData.value = data
-      Object.keys(formData.value).forEach(key => {
-        formData.value[key] = data[key] || ''
+      Object.keys(formData).forEach(key => {
+        formData[key] = data[key] || ''
       })
-      formData.value.oldTitle = title
+      formData.oldTitle = title
     }
 
     const onAdd = () => {
@@ -153,7 +143,7 @@ export default {
     }
 
     const onSave = async () => {
-      const { id, title, abstract, thumbnail, content } = formData.value
+      const { id, title, abstract, thumbnail, content } = formData
       const method = view.value === 'edit' ? 'put' : 'post'
       const url = `/api/article/${view.value === 'edit' ? 'update' : 'insert'}`
       try {
@@ -170,14 +160,14 @@ export default {
         })
         ElMessage.success('保存成功!')
         onQuery()
-        pagging.reload()
+        refresh()
       } catch (e) {
         ElMessage.drror(e.message)
       }
     }
 
     const onQuery = async () => {
-      formRef.value.resetFields()
+      formRef.value?.resetFields()
       await nextTick()
       view.value = 'list'
     }
@@ -190,15 +180,14 @@ export default {
         center: true
       }).then(() => {
         deleteData(row)
-        pagging.reload()
+        refresh()
       })
     }
 
     return {
       view,
-      pagging,
-      tableData,
-      tableRef,
+      page,
+      table,
       formData,
       formRef,
       onQuery,
